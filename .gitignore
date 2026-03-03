@@ -1,0 +1,10 @@
+# MySQL 데이터 (절대 올리면 안 됨)
+infra/mysql/data/*
+!infra/mysql/data/.gitkeep
+
+# OS 생성 파일
+.DS_Store
+Thumbs.db
+
+# 환경 변수 파일 (비밀번호 등 포함)
+.env

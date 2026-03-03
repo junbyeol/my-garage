@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  # 1. 공용 데이터베이스 (MySQL)
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password # 실제 사용할 강력한 비밀번호로 바꾸세요
+      MYSQL_DATABASE: main_db
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    networks:
+      - web-network
+
+  # 2. 메인 관문 (Nginx)
+  nginx:
+    image: nginx:alpine
+    container_name: main-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/usr/share/nginx/html
+    networks:
+      - web-network
+
+networks:
+  web-network:
+    name: web-network
+    driver: bridge
