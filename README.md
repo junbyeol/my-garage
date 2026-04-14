@@ -37,13 +37,20 @@
 
 
 # 새로운 도메인을 포함한 인증서 등록 방법
-(infra 경로에서) docker compose stop nginx
-sudo certbot certonly --standalone \
-  --cert-name junbyeol.me \
-  --expand \
-  -d junbyeol.me \
-  -d www.junbyeol.me \
-  -d resume.junbyeol.me \
-  -d github.junbyeol.me \
-  -d linkedin.junbyeol.me
+
+```bash
+# /infra 경로로 이동
+
+# 현재 구조로는 인증서 발급을 위해서 잠시 80번 포트를 certbot에게 열어주어야 하는 문제가 있음
+# 이 때, 본 VM의 모든 서비스가 잠시 중단되므로 개선이 필요
+docker compose stop nginx
+
+# (선택) 80 포트 비워졌는지 확인
+sudo lsof -i :80
+
+# xxx.junbyeol.me의 인증서를 발급할 때
+sudo certbot certonly --standalone --cert-name xxx.junbyeol.me -d xxx.junbyeol.me
+
 docker compose start nginx
+
+```
