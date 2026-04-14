@@ -36,7 +36,8 @@
 2.  **SSL 인증서 발급:** Certbot을 실행하여 새 도메인에 대한 인증서를 갱신/추가합니다.
 
 
-# 새로운 도메인을 포함한 인증서 등록 방법
+# 새로운 서비스 추가 방법
+### 1. 새로운 도메인의 인증서 등록
 
 ```bash
 # /infra 경로로 이동
@@ -53,4 +54,16 @@ sudo certbot certonly --standalone --cert-name xxx.junbyeol.me -d xxx.junbyeol.m
 
 docker compose start nginx
 
+```
+
+### 2. 새로운 서비스 컨테이너 실행
+새로운 서비스 경로에서 docker compose up
+
+### 3. nginx.conf에 블럭 추가 후
+```bash
+# nginx 컨테이너에서 conf 파일이 유효한지 테스트
+docker compose exec nginx nginx -t
+
+# conf 파일이 유효했다면 reload
+docker compose exec nginx nginx -s reload
 ```
