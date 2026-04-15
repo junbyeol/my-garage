@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # 1. 공용 데이터베이스 (MySQL)
+  # 공용 데이터베이스 (MySQL)
   db:
     image: mysql:8.0
     container_name: mysql-db
@@ -14,7 +14,7 @@ services:
     networks:
       - web-network
 
-  # 2. 메인 관문 (Nginx)
+  # 메인 관문 (Nginx)
   nginx:
     image: nginx:1.28.2-alpine
     container_name: main-nginx
@@ -25,6 +25,14 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - /etc/letsencrypt:/etc/letsencrypt
+    networks:
+      - web-network
+
+  # resume.junbyeol.me 프론트
+  resume-app:
+    image: ghcr.io/junbyeol/resume-app:latest
+    container_name: resume-app
+    restart: always    
     networks:
       - web-network
 
