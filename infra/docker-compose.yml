@@ -34,6 +34,13 @@ services:
     networks:
       - web-network
 
+  tiptap-app:
+    image: ghcr.io/junbyeol/tiptap-app:latest
+    container_name: tiptap-app
+    restart: always
+    networks:
+      - web-network
+
 networks:
   web-network:
     name: web-network
