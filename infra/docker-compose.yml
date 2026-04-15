@@ -26,6 +26,14 @@ services:
     networks:
       - web-network
 
+  # junbyeol.me 프론트
+  junbyeol-me:
+    image: ghcr.io/junbyeol/junbyeol-me:latest
+    container_name: junbyeol-me
+    restart: always    
+    networks:
+      - web-network
+
   # resume.junbyeol.me 프론트
   resume-app:
     image: ghcr.io/junbyeol/resume-app:latest
@@ -34,6 +42,7 @@ services:
     networks:
       - web-network
 
+ # tiptap.junbyeol.me 프론트
   tiptap-app:
     image: ghcr.io/junbyeol/tiptap-app:latest
     container_name: tiptap-app
