@@ -5,10 +5,18 @@ services:
     container_name: mysql-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: your_root_password # 실제 사용할 강력한 비밀번호로 바꾸세요
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: main_db
     volumes:
       - ./mysql/data:/var/lib/mysql
+    networks:
+      - web-network
+
+  # 공용 캐시 (Redis)
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: always
     networks:
       - web-network
 
@@ -30,7 +38,7 @@ services:
   junbyeol-me:
     image: ghcr.io/junbyeol/junbyeol-me:latest
     container_name: junbyeol-me
-    restart: always    
+    restart: always
     networks:
       - web-network
 
@@ -38,15 +46,39 @@ services:
   resume-app:
     image: ghcr.io/junbyeol/resume-app:latest
     container_name: resume-app
-    restart: always    
+    restart: always
     networks:
       - web-network
 
- # tiptap.junbyeol.me 프론트
+  # tiptap.junbyeol.me 프론트
   tiptap-app:
     image: ghcr.io/junbyeol/tiptap-app:latest
     container_name: tiptap-app
     restart: always
+    networks:
+      - web-network
+
+  # plaza.junbyeol.me 프론트
+  plaza-frontend:
+    image: ghcr.io/junbyeol/plaza-frontend:latest
+    container_name: plaza-frontend
+    restart: always
+    networks:
+      - web-network
+
+  # plaza-api.junbyeol.me 백엔드
+  plaza-backend:
+    image: ghcr.io/junbyeol/plaza-backend:latest
+    container_name: plaza-backend
+    restart: always
+    environment:
+      DATABASE_URL: mysql://root@db:3306/plaza
+      REDIS_URL: redis://redis:6379
+      FRONTEND_URL: https://plaza.junbyeol.me
+      PORT: 3000
+    depends_on:
+      - db
+      - redis
     networks:
       - web-network
 
