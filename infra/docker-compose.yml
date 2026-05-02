@@ -20,17 +20,19 @@ services:
     networks:
       - web-network
 
-  # 메인 관문 (Nginx)
-  nginx:
-    image: nginx:1.28.2-alpine
-    container_name: main-nginx
+  # 메인 관문 (Caddy)
+  caddy:
+    image: caddy:2-alpine
+    container_name: main-caddy
     restart: always
     ports:
       - "80:80"
       - "443:443"
+      - "443:443/udp"
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - /etc/letsencrypt:/etc/letsencrypt
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
     networks:
       - web-network
 
@@ -86,3 +88,7 @@ networks:
   web-network:
     name: web-network
     driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

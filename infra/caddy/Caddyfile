@@ -1,0 +1,37 @@
+# www → apex 리다이렉트
+www.junbyeol.me {
+	redir https://junbyeol.me{uri} permanent
+}
+
+junbyeol.me {
+	reverse_proxy junbyeol-me:80
+}
+
+resume.junbyeol.me {
+	reverse_proxy resume-app:80
+}
+
+tiptap.junbyeol.me {
+	reverse_proxy tiptap-app:80
+}
+
+plaza.junbyeol.me {
+	reverse_proxy plaza-frontend:80
+}
+
+plaza-api.junbyeol.me {
+	reverse_proxy plaza-backend:3000
+}
+
+# 단축 링크
+github.junbyeol.me {
+	redir https://github.com/junbyeol permanent
+}
+
+linkedin.junbyeol.me {
+	redir https://linkedin.com/in/junsungyoon/ permanent
+}
+
+server.junbyeol.me {
+	respond "이곳은 백엔드 API 서버가 들어올 자리입니다." 200
+}
