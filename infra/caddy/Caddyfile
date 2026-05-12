@@ -31,6 +31,10 @@ plaza-api.junbyeol.me {
 	reverse_proxy plaza-backend:3000
 }
 
+grafana.junbyeol.me {
+    reverse_proxy grafana:3000
+}
+
 # 단축 링크
 github.junbyeol.me {
 	redir https://github.com/junbyeol permanent
