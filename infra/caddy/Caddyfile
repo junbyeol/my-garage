@@ -35,11 +35,11 @@ grafana.junbyeol.me {
 
 # 단축 링크
 github.junbyeol.me {
-	redir https://github.com/junbyeol permanent
+	redir https://github.com/junbyeol
 }
 
 linkedin.junbyeol.me {
-	redir https://linkedin.com/in/junsungyoon/ permanent
+	redir https://linkedin.com/in/junsungyoon/
 }
 
 server.junbyeol.me {
