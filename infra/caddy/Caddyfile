@@ -1,8 +1,6 @@
 {
-	servers {
-		metrics {
-			per_host
-		}
+	metrics {
+		per_host
 	}
 }
 
