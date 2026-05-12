@@ -67,3 +67,6 @@ docker compose exec nginx nginx -t
 # conf 파일이 유효했다면 reload
 docker compose exec nginx nginx -s reload
 ```
+
+---
+curl http://localhost:2019/metrics

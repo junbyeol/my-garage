@@ -1,3 +1,11 @@
+{
+	servers {
+		metrics {
+			per_host
+		}
+	}
+}
+
 # www → apex 리다이렉트
 www.junbyeol.me {
 	redir https://junbyeol.me{uri} permanent
