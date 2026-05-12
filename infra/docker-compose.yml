@@ -115,3 +115,5 @@ networks:
 volumes:
   caddy_data:
   caddy_config:
+  grafana_data:
+  prometheus_data:
